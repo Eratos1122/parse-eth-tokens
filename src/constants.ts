@@ -95,6 +95,10 @@ export const SOCIAL_SCHEMA = object({
     .default('')
 });
 
+const DEPRECATED_TOKEN_SCHEMA = object({
+  new_address: string()
+});
+
 /**
  * Validation schema.
  */
@@ -105,6 +109,7 @@ export const TOKEN_SCHEMA = object({
   decimals: number()
     .min(0)
     .required(),
+  deprecation: DEPRECATED_TOKEN_SCHEMA,
   name: string().required(),
   social: SOCIAL_SCHEMA,
   symbol: string().required(),
@@ -138,6 +143,7 @@ export interface RawToken {
   address?: string;
   symbol?: string;
   decimals?: number | string;
+  deprecation?: any;
   social?: TokenSocialMetadata;
   name?: string;
   website?: any;
@@ -150,8 +156,10 @@ export interface Token {
   address: string;
   symbol: string;
   decimals: number;
+  deprecation?: any;
   name: string;
   social?: any;
+  newSymbol?: any;
   website?: any;
   uuid: string;
 }

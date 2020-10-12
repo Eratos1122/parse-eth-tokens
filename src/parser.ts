@@ -1,6 +1,7 @@
 import { promises as fs } from 'fs';
 import { resolve } from 'path';
 import mkdirp from 'mkdirp';
+import { find } from 'smoldash';
 import getUuidByString from 'uuid-by-string';
 import { NETWORK_NAMES, RawToken, TokenSocialMetadata, Token, TOKEN_SCHEMA } from './constants';
 
@@ -92,6 +93,15 @@ export const addUniqueId = (tokens: Token[], chainId: number): Token[] => {
   }));
 };
 
+function resolveDeprecations(token: Token, index: number, tokens: Token[]): Token {
+  if (token.deprecation) {
+    const newToken = find(tokens, ({ address }) => address === token.deprecation.new_address);
+    return newToken || token;
+  }
+
+  return token;
+}
+
 /**
  * Finds duplicate tokens and changes the symbols for the duplicates.
  *
@@ -113,6 +123,7 @@ export const fixDuplicates = (tokens: Token[]): Token[] => {
 
       return [...checkedTokens, newToken];
     }, [])
+    .map(resolveDeprecations)
     .map(({ address, decimals, name, newSymbol, social, symbol, uuid, website = '' }) => ({
       address,
       decimals,

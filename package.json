@@ -33,6 +33,7 @@
     "mkdirp": "^0.5.1",
     "request": "^2.88.0",
     "simple-git": "^2.20.1",
+    "smoldash": "^0.8.1",
     "uuid-by-string": "^3.0.1"
   },
   "devDependencies": {

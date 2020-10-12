@@ -3850,6 +3850,11 @@ slice-ansi@0.0.4:
   resolved "https://registry.yarnpkg.com/slice-ansi/-/slice-ansi-0.0.4.tgz#edbf8903f66f7ce2f8eafd6ceed65e264c831b35"
   integrity sha1-7b+JA/ZvfOL46v1s7tZeJkyDGzU=
 
+smoldash@^0.8.1:
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/smoldash/-/smoldash-0.8.1.tgz#4e235b17eee2022e28208abca83417f879986f48"
+  integrity sha512-UWuyZ6QRVZ/1QFJkMC7yNIVAFTDuzD9RNb+jHDFACfVNRMUoUQBcMLpfy47WIGXe5LwB6e+FwJJP4um+u1LacQ==
+
 snapdragon-node@^2.0.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/snapdragon-node/-/snapdragon-node-2.1.1.tgz#6c175f86ff14bdb0724563e8f3c1b021a286853b"
