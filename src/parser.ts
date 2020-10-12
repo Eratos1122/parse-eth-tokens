@@ -2,7 +2,7 @@ import { promises as fs } from 'fs';
 import { resolve } from 'path';
 import mkdirp from 'mkdirp';
 import getUuidByString from 'uuid-by-string';
-import { NETWORK_NAMES, RawToken, Token, TOKEN_SCHEMA } from './constants';
+import { NETWORK_NAMES, RawToken, TokenSocialMetadata, Token, TOKEN_SCHEMA } from './constants';
 
 /**
  * Checks available networks and throws an error if the provided network does not exist.
@@ -113,12 +113,14 @@ export const fixDuplicates = (tokens: Token[]): Token[] => {
 
       return [...checkedTokens, newToken];
     }, [])
-    .map(({ symbol, newSymbol, address, decimal, name, uuid }) => ({
+    .map(({ address, decimals, name, newSymbol, social, symbol, uuid, website = '' }) => ({
       address,
-      symbol: newSymbol,
-      decimal,
+      decimals,
       name,
-      uuid
+      social,
+      symbol: newSymbol,
+      uuid,
+      website
     }));
 };
 

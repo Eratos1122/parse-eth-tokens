@@ -53,22 +53,84 @@ export const NETWORKS = [
 
 export const NETWORK_NAMES = NETWORKS.map(network => network.name);
 
+export const SOCIAL_SCHEMA = object({
+  blog: string()
+    .empty('')
+    .default(''),
+  chat: string()
+    .empty('')
+    .default(''),
+  facebook: string()
+    .empty('')
+    .default(''),
+  forum: string()
+    .empty('')
+    .default(''),
+  github: string()
+    .empty('')
+    .default(''),
+  gitter: string()
+    .empty('')
+    .default(''),
+  instagram: string()
+    .empty('')
+    .default(''),
+  linkedin: string()
+    .empty('')
+    .default(''),
+  reddit: string()
+    .empty('')
+    .default(''),
+  slack: string()
+    .empty('')
+    .default(''),
+  telegram: string()
+    .empty('')
+    .default(''),
+  twitter: string()
+    .empty('')
+    .default(''),
+  youtube: string()
+    .empty('')
+    .default('')
+});
+
 /**
  * Validation schema.
  */
 export const TOKEN_SCHEMA = object({
-  symbol: string().required(),
   address: string()
     .regex(/^0x[a-fA-F0-9]{40}$/)
     .required(),
-  decimal: number()
+  decimals: number()
     .min(0)
     .required(),
-  name: string().required()
-})
-  .options({ stripUnknown: true })
-  .rename('decimals', 'decimal');
+  name: string().required(),
+  social: SOCIAL_SCHEMA,
+  symbol: string().required(),
+  website: string()
+    .empty('')
+    .default('')
+}).options({ stripUnknown: true });
 
+/**
+ * Raw token data that is loaded from the JSON files.
+ */
+export interface TokenSocialMetadata {
+  blog?: string;
+  chat?: string;
+  facebook?: string;
+  forum?: string;
+  github?: string;
+  gitter?: string;
+  instagram?: string;
+  linkedin?: string;
+  reddit?: string;
+  slack?: string;
+  telegram?: string;
+  twitter?: string;
+  youtube?: string;
+}
 /**
  * Raw token data that is loaded from the JSON files.
  */
@@ -76,7 +138,9 @@ export interface RawToken {
   address?: string;
   symbol?: string;
   decimals?: number | string;
+  social?: TokenSocialMetadata;
   name?: string;
+  website?: any;
 }
 
 /**
@@ -85,7 +149,9 @@ export interface RawToken {
 export interface Token {
   address: string;
   symbol: string;
-  decimal: number;
+  decimals: number;
   name: string;
+  social?: any;
+  website?: any;
   uuid: string;
 }

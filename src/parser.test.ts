@@ -60,22 +60,6 @@ describe('validateTokenData', () => {
     expect(validateTokenData(token)).not.toHaveProperty('foo', 'bar');
   });
 
-  it('renames the decimals field to decimal', () => {
-    const token = {
-      address: '0x0000000000000000000000000000000000000000',
-      decimals: 18,
-      symbol: 'FOO',
-      name: 'Foo'
-    };
-
-    expect(validateTokenData(token)).toHaveProperty(
-      'address',
-      '0x0000000000000000000000000000000000000000'
-    );
-    expect(validateTokenData(token)).toHaveProperty('decimal', 18);
-    expect(validateTokenData(token)).toHaveProperty('symbol', 'FOO');
-  });
-
   it('throws an error on invalid input', () => {
     expect(() => validateTokenData({})).toThrow();
     expect(() =>
@@ -104,15 +88,17 @@ describe('parseTokenFiles', () => {
     expect(tokens.length).toBe(2);
     expect(tokens[0]).toStrictEqual({
       address: '0x0000000000000000000000000000000000000000',
+      decimals: 18,
+      name: 'Bar',
       symbol: 'BAR',
-      decimal: 18,
-      name: 'Bar'
+      website: ''
     });
     expect(tokens[1]).toStrictEqual({
       address: '0x0000000000000000000000000000000000000001',
+      decimals: 18,
+      name: 'Baz',
       symbol: 'BAZ',
-      decimal: 18,
-      name: 'Baz'
+      website: ''
     });
   });
 
@@ -122,9 +108,10 @@ describe('parseTokenFiles', () => {
     expect(tokens.length).toBe(1);
     expect(tokens[0]).toStrictEqual({
       address: '0x0000000000000000000000000000000000000001',
+      decimals: 18,
+      name: 'Baz',
       symbol: 'BAZ',
-      decimal: 18,
-      name: 'Baz'
+      website: ''
     });
   });
 });
@@ -135,25 +122,25 @@ describe('addUniqueId', () => {
       {
         address: '0x0000000000000000000000000000000000000000',
         symbol: 'FOO',
-        decimal: 18,
+        decimals: 18,
         name: 'Foo'
       },
       {
         address: '0x0000000000000000000000000000000000000001',
         symbol: 'BAR',
-        decimal: 18,
+        decimals: 18,
         name: 'Bar'
       },
       {
         address: '0x0000000000000000000000000000000000000002',
         symbol: 'BAZ',
-        decimal: 18,
+        decimals: 18,
         name: 'Baz'
       },
       {
         address: '0x0000000000000000000000000000000000000003',
         symbol: 'QUX',
-        decimal: 18,
+        decimals: 18,
         name: 'Qux'
       }
     ];
@@ -169,28 +156,28 @@ describe('fixDuplicates', () => {
       {
         address: '0x0000000000000000000000000000000000000000',
         symbol: 'FOO',
-        decimal: 18,
+        decimals: 18,
         name: 'Foo',
         uuid: ''
       },
       {
         address: '0x0000000000000000000000000000000000000001',
         symbol: 'FOO',
-        decimal: 18,
+        decimals: 18,
         name: 'Foo',
         uuid: ''
       },
       {
         address: '0x0000000000000000000000000000000000000002',
         symbol: 'FOO',
-        decimal: 18,
+        decimals: 18,
         name: 'Foo',
         uuid: ''
       },
       {
         address: '0x0000000000000000000000000000000000000003',
         symbol: 'BAR',
-        decimal: 18,
+        decimals: 18,
         name: 'Bar',
         uuid: ''
       }
@@ -211,28 +198,28 @@ describe('sortTokens', () => {
     const tokens = [
       {
         address: '0x0000000000000000000000000000000000000000',
-        decimal: 18,
+        decimals: 18,
         symbol: 'FOO',
         name: 'Foo',
         uuid: ''
       },
       {
         address: '0x0000000000000000000000000000000000000000',
-        decimal: 18,
+        decimals: 18,
         symbol: 'BAR',
         name: 'Bar',
         uuid: ''
       },
       {
         address: '0x0000000000000000000000000000000000000000',
-        decimal: 18,
+        decimals: 18,
         symbol: 'BAZ',
         name: 'Baz',
         uuid: ''
       },
       {
         address: '0x0000000000000000000000000000000000000000',
-        decimal: 18,
+        decimals: 18,
         symbol: 'QUX',
         name: 'Qux',
         uuid: ''
@@ -277,28 +264,28 @@ describe('writeToDisk', () => {
       {
         address: '0x0000000000000000000000000000000000000000',
         symbol: 'FOO',
-        decimal: 18,
+        decimals: 18,
         name: 'Foo',
         uuid: ''
       },
       {
         address: '0x0000000000000000000000000000000000000001',
         symbol: 'FOO',
-        decimal: 18,
+        decimals: 18,
         name: 'Foo',
         uuid: ''
       },
       {
         address: '0x0000000000000000000000000000000000000002',
         symbol: 'FOO',
-        decimal: 18,
+        decimals: 18,
         name: 'Foo',
         uuid: ''
       },
       {
         address: '0x0000000000000000000000000000000000000003',
         symbol: 'BAR',
-        decimal: 18,
+        decimals: 18,
         name: 'Bar',
         uuid: ''
       }
