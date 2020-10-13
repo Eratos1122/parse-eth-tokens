@@ -93,13 +93,25 @@ export const addUniqueId = (tokens: Token[], chainId: number): Token[] => {
   }));
 };
 
-function resolveDeprecations(token: Token, index: number, tokens: Token[]): Token {
-  if (token.deprecation) {
-    const newToken = find(tokens, ({ address }) => address === token.deprecation.new_address);
-    return newToken || token;
-  }
+/**
+ * Finds deprecated tokens and replaces them with the data
+ * for the latest version of the token
+ *
+ * @param {Token} token
+ * @param {index} number
+ * @param {Token[]} tokens
+ *
+ * @return {Token}
+ */
+export function resolveDeprecations(tokens: Token[]): Token[] {
+  return tokens.map((token: Token) => {
+    if (token.deprecation) {
+      const newToken = tokens.find(({ address }) => address === token.deprecation.new_address);
+      return newToken || token;
+    }
 
-  return token;
+    return token;
+  });
 }
 
 /**
@@ -123,7 +135,6 @@ export const fixDuplicates = (tokens: Token[]): Token[] => {
 
       return [...checkedTokens, newToken];
     }, [])
-    .map(resolveDeprecations)
     .map(({ address, decimals, name, newSymbol, social, symbol, uuid, website = '' }) => ({
       address,
       decimals,

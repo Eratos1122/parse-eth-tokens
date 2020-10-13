@@ -6,6 +6,7 @@ import {
   checkNetworks,
   createOutputFolder,
   fixDuplicates,
+  resolveDeprecations,
   parseTokenFiles,
   sortTokens,
   writeToDisk
@@ -63,6 +64,7 @@ export const parseTokens = async (options: ParseOptions): Promise<void> => {
               options.exclude
             )
               .then(tokens => addUniqueId(tokens, chainId))
+              .then(resolveDeprecations)
               .then(fixDuplicates)
               .then(sortTokens);
           }

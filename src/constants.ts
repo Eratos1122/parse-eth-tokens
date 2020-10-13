@@ -141,11 +141,11 @@ export interface TokenSocialMetadata {
  */
 export interface RawToken {
   address?: string;
-  symbol?: string;
   decimals?: number | string;
   deprecation?: any;
-  social?: TokenSocialMetadata;
   name?: string;
+  social?: TokenSocialMetadata;
+  symbol?: string;
   website?: any;
 }
 
@@ -154,12 +154,12 @@ export interface RawToken {
  */
 export interface Token {
   address: string;
-  symbol: string;
   decimals: number;
   deprecation?: any;
   name: string;
-  social?: any;
   newSymbol?: any;
-  website?: any;
+  social?: any;
+  symbol: string;
   uuid: string;
+  website?: any;
 }
