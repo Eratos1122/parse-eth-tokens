@@ -158,7 +158,7 @@ export interface Token {
   deprecation?: any;
   name: string;
   newSymbol?: any;
-  social?: any;
+  social?: TokenSocialMetadata;
   symbol: string;
   uuid: string;
   website?: any;

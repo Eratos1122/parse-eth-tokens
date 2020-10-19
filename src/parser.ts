@@ -3,7 +3,7 @@ import { resolve } from 'path';
 import mkdirp from 'mkdirp';
 import { find } from 'smoldash';
 import getUuidByString from 'uuid-by-string';
-import { NETWORK_NAMES, RawToken, TokenSocialMetadata, Token, TOKEN_SCHEMA } from './constants';
+import { NETWORK_NAMES, RawToken, Token, TOKEN_SCHEMA } from './constants';
 
 /**
  * Checks available networks and throws an error if the provided network does not exist.
